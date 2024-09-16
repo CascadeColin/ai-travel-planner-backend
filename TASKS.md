@@ -7,6 +7,8 @@
 # Dev Philosophy
 I have never attempted a project of this scale in this short of a time frame.  Therefore, I am not planning this to the nitty gritty details of assigning a task to each class and method.  I simply don't have a full grasp of everything needed, and also do not have time to plan in that much detail.  To compensate, I am being conservative on time estimates knowing I will run into unforseen technical issues.  I have also alloted a large amount of time to R&D for brushing up on TypeScript and fully understanding OpenAPI.  If I end up ahead of this conservative schedule, I will implement stretch goals.
 
+React technical details include the time taken for styling using Shadcn.
+
 # Create Config and set a Preset - Initial task after R&D
 
 Create a profile for the Planner.  This allows for the app to remember if they are a business or leisure traveler.  It also will remember their travel cost preferences.
@@ -184,3 +186,4 @@ Currently, the total time estimated is: 77 hours.  This includes working through
 If I complete this faster, there are some ideas I have to expand on the project:
 * Implement group Trips that has a specified Planner as an admin for the trip.
 * Implement creating a new Planner (current project will have pre-made user logins).
+* Implement special effects in UI layer

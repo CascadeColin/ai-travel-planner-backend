@@ -10,9 +10,9 @@ public class PlannerMapper implements RowMapper<Planner> {
     @Override
     public Planner mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new Planner(
-                rs.getInt("planner_id"),
+                rs.getInt("login_id"),
                 rs.getString("username"),
-                rs.getString("password"),
+                rs.getString("password_hash"),
                 rs.getBoolean("enabled")
         );
     }

@@ -1,19 +1,17 @@
 package travel.planner.security;
 
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import travel.planner.data.PlannerRepository;
 import travel.planner.domain.ActionStatus;
 import travel.planner.domain.Result;
 import travel.planner.models.Planner;
 
-import java.util.List;
-
-// TODO: red swiggles are expected here, as the Planner repository is not yet implemented
+@Service
 public class AppUserService implements UserDetailsService {
     private final PlannerRepository plannerReposity; // TODO: data layer to fetch these from DB
     private final PasswordEncoder passwordEncoder;

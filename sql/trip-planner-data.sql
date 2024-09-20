@@ -50,9 +50,9 @@ insert into config (traveler_type, cost_pref, transportation_pref) values
 	("leisure", "budget", "car");
     
 insert into login (username, password_hash, enabled) values 
-	("rsmith@bigcompany.com", "asdfkjsadlf", 1), -- get proper password hashes for these
-	("guitarhero34@freemail.com", "dasfljhdasf", 1),
-	("disableduser@banned.com", "ajdsfhdsaf", 0);
+	("rsmith@bigcompany.com", "$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa", 1), -- get proper password hashes for these
+	("guitarhero34@freemail.com", "$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa", 1),
+	("disableduser@banned.com", "$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa", 0);
     
 insert into planner (`name`, login_id, config_id) values 
 	("Rachel", 1, 1),

@@ -1,0 +1,31 @@
+@url = http://localhost:8080
+
+### Bad credentials, does not exist in db
+
+POST {{url}}/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "bad-username",
+    "password": "bad-password"
+}
+
+### good credentials
+
+POST {{url}}/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "rsmith@bigcompany.com",
+    "password": "P@ssw0rd!"
+}
+
+### User was banned - should return 403 (enabled === 0)
+
+POST {{url}}/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "disableduser@banned.com",
+    "password": "P@ssw0rd!"
+}

@@ -11,19 +11,24 @@ public class Planner implements UserDetails {
     private final String username;
     private final String password;
     private boolean enabled;
+    private int loginId;
+    private int configId;
+    private String name;
 
-    public Planner(int plannerId, String username, String password, boolean enabled) {
+    public Planner(int plannerId, String username, String password, boolean enabled, String name, int loginId, int configId) {
         this.plannerId = plannerId;
         this.username = username;
         this.password = password;
         this.enabled = enabled;
+        this.loginId = loginId;
+        this.configId = configId;
+        this.name = name;
     }
 
-    // TODO: Implement the methods of the UserDetails interface.
-    // The methods should return the appropriate values for the Planner class.
-    // may not need this method
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        // NOT USED
         return List.of();
     }
 
@@ -58,15 +63,39 @@ public class Planner implements UserDetails {
         return enabled;
     }
 
-    public void setPlannerId(int plannerId) {
-        this.plannerId = plannerId;
-    }
-
     public int getPlannerId() {
         return plannerId;
     }
 
+    public void setPlannerId(int plannerId) {
+        this.plannerId = plannerId;
+    }
+
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public int getConfigId() {
+        return configId;
+    }
+
+    public void setConfigId(int configId) {
+        this.configId = configId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getLoginId() {
+        return loginId;
+    }
+
+    public void setLoginId(int loginId) {
+        this.loginId = loginId;
     }
 }

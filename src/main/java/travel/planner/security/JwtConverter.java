@@ -41,7 +41,7 @@ public class JwtConverter {
                     .parseSignedClaims(token.substring(7));
             int plannerId = jws.getPayload().get("plannerId", Integer.class);
             String username = jws.getPayload().getSubject();
-            return new Planner(plannerId, username, "", true);
+            return new Planner(plannerId, username, "", true, "name", 0, 0);
         }
         catch (JwtException e) {
             System.out.println(e); //TODO: handle this in GlobalErrorHandler

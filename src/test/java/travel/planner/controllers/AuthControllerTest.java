@@ -36,7 +36,7 @@ public class AuthControllerTest {
 
     @BeforeEach
     void setup() {
-        Planner user = new Planner(1, "admin@admin.com", "P@ssw0rd!", true);
+        Planner user = new Planner(1, "admin@admin.com", "P@ssw0rd!", true, "User", 1, 1);
         token = jwtConverter.getTokenFromPlanner(user);
     }
 

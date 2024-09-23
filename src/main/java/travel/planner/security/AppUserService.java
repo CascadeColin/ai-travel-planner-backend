@@ -38,7 +38,7 @@ public class AppUserService implements UserDetailsService {
             return result;
         }
         password = passwordEncoder.encode(password);
-        Planner planner = new Planner(0, username, password, true);
+        Planner planner = new Planner(0, username, password, true, "New User", 0, 0);
         try {
             planner = plannerReposity.create(planner);
             result.setPayload(planner);

@@ -3,13 +3,17 @@ package travel.planner.data;
 import org.springframework.transaction.annotation.Transactional;
 import travel.planner.models.Planner;
 
+import java.util.List;
+
 public interface PlannerRepository {
-     @Transactional
+     List<Planner> findAll();
      Planner findByUsername(String username);
 
-     @Transactional
+     Planner findById(int planner);
+
      Planner create(Planner user);
 
-     @Transactional
      boolean update(Planner user);
+
+     boolean deleteById(int planner);
 }

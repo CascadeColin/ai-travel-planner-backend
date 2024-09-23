@@ -62,7 +62,8 @@ begin
 	insert into config (traveler_type, cost_pref, transportation_pref) values 
 		("business", "budget", "airplane"),
         ("leisure", "luxury", "train"),
-        ("leisure", "budget", "car");
+        ("leisure", "budget", "car"),
+        ("no planner attached", "used to confirm check for attached planner works", "none");
 	insert into login (username, password_hash, enabled) values 
 		("rsmith@bigcompany.com", "$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa", 1), -- get proper password hashes for these
         ("guitarhero34@freemail.com", "$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa", 1),

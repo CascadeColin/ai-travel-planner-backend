@@ -35,7 +35,6 @@ public class PlannerJdbcRepository implements PlannerRepository {
         return jdbcTemplate.query(sql, new PlannerMapper(), planner).stream().findFirst().orElse(null);
     }
 
-    // TODO: implement create and update
     @Override
     public Planner create(Planner user) {
         user = nullCheck(user);
@@ -55,17 +54,7 @@ public class PlannerJdbcRepository implements PlannerRepository {
 
     }
 
-    @Override
-    public boolean update(Planner user) {
-        final String sql = "update login set username = ?, password_hash = ?, enabled = ? where login_id = ?";
-        return jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.isEnabled(), user.getPlannerId()) > 0;
-    }
-
-    @Override
-    public boolean deleteById(int planner) {
-        final String sql = "delete from login where login_id = ?";
-        return jdbcTemplate.update(sql, planner) > 0;
-    }
+    // TODO: implement update and delete if there is time
 
     private int findNextLoginId() {
         final String sql = "select max(login_id) from login";

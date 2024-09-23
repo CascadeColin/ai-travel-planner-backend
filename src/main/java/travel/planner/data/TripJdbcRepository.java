@@ -4,12 +4,20 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import travel.planner.models.Trip;
 
+import java.util.List;
+
 @Repository
 public class TripJdbcRepository implements TripRepository {
     private final JdbcTemplate jdbcTemplate;
 
     public TripJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public List<Trip> findAll() {
+        final String sql = "select trip_id, start_date, end_date, destination, trip_details, planner_id from trip";
+        return jdbcTemplate.query(sql, new TripMapper());
     }
 
     @Override

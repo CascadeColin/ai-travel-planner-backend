@@ -48,11 +48,9 @@ public class PlannerRepositoryTest {
     }
 
     @Test
-    void shouldUpdateJohnSmith() {
-        Planner planner = repository.findByUsername("rsmith@bigcompany.com");
-        planner.setEnabled(false);
-        assertTrue(repository.update(planner));
-        Planner updated = repository.findByUsername("rsmith@bigcompany.com");
-        assertFalse(updated.isEnabled());
+    void shouldNotCreatePlannerWithMissingUsername() {
+        Planner planner = new Planner(0, null, "password", true, "New User", 1, 1);
+        Planner actual = repository.create(planner);
+        assertNull(actual);
     }
 }

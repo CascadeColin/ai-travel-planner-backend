@@ -31,8 +31,11 @@ public class ConfigController {
 
     @PostMapping
     public ResponseEntity<Config> add(@RequestBody Config config) {
+        StatusGenerator statusGenerator = new StatusGenerator();
         Result<Config> result = service.create(config);
-        return new ResponseEntity<>(result.getPayload(), getStatus(result, HttpStatus.CREATED));
+        statusGenerator.setResult(result);
+        statusGenerator.setStatusDefault(HttpStatus.CREATED);
+        return new ResponseEntity<>(result.getPayload(), statusGenerator.getStatus());
     }
 
     @PutMapping("/{configId}")
@@ -40,21 +43,19 @@ public class ConfigController {
         if (config != null && config.getConfigId() != configId) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
+        StatusGenerator statusGenerator = new StatusGenerator();
         Result<Config> result = service.update(config);
-        return new ResponseEntity<>(getStatus(result, HttpStatus.NO_CONTENT));
+        statusGenerator.setResult(result);
+        statusGenerator.setStatusDefault(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(statusGenerator.getStatus());
     }
 
     @DeleteMapping("/{configId}")
     public ResponseEntity<Void> delete(@PathVariable int configId) {
+        StatusGenerator statusGenerator = new StatusGenerator();
         Result<Config> result = service.deleteById(configId);
-        return new ResponseEntity<>(getStatus(result, HttpStatus.NO_CONTENT));
-    }
-
-    private HttpStatus getStatus(Result<Config> result, HttpStatus statusDefault) {
-        return switch (result.getStatus()) {
-            case INVALID -> HttpStatus.PRECONDITION_FAILED;
-            case NOT_FOUND -> HttpStatus.NOT_FOUND;
-            default -> statusDefault;
-        };
+        statusGenerator.setResult(result);
+        statusGenerator.setStatusDefault(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(statusGenerator.getStatus());
     }
 }

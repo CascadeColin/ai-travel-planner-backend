@@ -29,3 +29,42 @@ Content-Type: application/json
     "username": "disableduser@banned.com",
     "password": "P@ssw0rd!"
 }
+
+
+#### refresh a valid user token
+
+POST {{url}}/refresh_token HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0cmF2ZWwtcGxhbm5lciIsInN1YiI6InJzbWl0aEBiaWdjb21wYW55LmNvbSIsInBsYW5uZXJJZCI6MSwiZXhwIjoxNzI3MjM5MTE4fQ.zSgAQ10jn_al41fKXDyOpPry0nzuDcxbLHWA1PEghcs
+
+### create new account
+
+POST {{url}}/create_account HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "newuser@fakeemail.net",
+    "password": "abcdefg123456",
+    "name": "Ralph Williams"
+}
+
+### rejected -> invalid password
+
+POST {{url}}/create_account HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "badsecurity@fakeemail.net",
+    "password": "hunter2",
+    "name": "Andy"
+}
+
+### rejected -> null values, returns array to front end to display all errors to user
+
+POST {{url}}/create_account HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "",
+    "password": "",
+    "name": ""
+}

@@ -27,7 +27,7 @@ public class SecurityConfig {
                 .requestMatchers("/authenticate").permitAll() // needed so users can reach AuthController
                 .requestMatchers("/refresh_token").authenticated()
                 // TODO: implement account creation as stretch goal
-                // .requestMatchers("/create_account").permitAll()
+                .requestMatchers("/create_account").permitAll()
 //                .requestMatchers(HttpMethod.GET,
 //                        "/order").permitAll()
 //                .requestMatchers(HttpMethod.GET,

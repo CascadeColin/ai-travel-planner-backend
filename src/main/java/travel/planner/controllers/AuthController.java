@@ -1,20 +1,21 @@
 package travel.planner.controllers;
 
-import io.jsonwebtoken.Jwt;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import travel.planner.domain.Result;
 import travel.planner.models.Planner;
 import travel.planner.security.AppUserService;
 import travel.planner.security.JwtConverter;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -47,5 +48,24 @@ public class AuthController {
         // 3. If successful, return a JWT token.
         // 4. If not, return a 403 Forbidden status.
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    }
+
+    @PostMapping("/refresh_token")
+    public ResponseEntity<Map<String,String>> refreshToken(@AuthenticationPrincipal Planner planner) {
+        String jwtToken = converter.getTokenFromPlanner(planner);
+        return new ResponseEntity<>(Map.of("jwt_token", jwtToken), HttpStatus.OK);
+    }
+
+    @PostMapping("/create_account")
+    public ResponseEntity<?> createAccount(@RequestBody RequestDTO credentials) {
+        Result<Planner> result = plannerService.create(credentials.getUsername(), credentials.getPassword(), credentials.getName());
+
+        if (!result.isSuccess()) {
+            return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
+        }
+
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("planner_id", result.getPayload().getPlannerId());
+        return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
 }

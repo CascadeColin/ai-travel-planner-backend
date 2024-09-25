@@ -1,9 +1,12 @@
 package travel.planner.data;
 
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import travel.planner.models.Planner;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 
 @Repository
@@ -37,47 +40,7 @@ public class PlannerJdbcRepository implements PlannerRepository {
 
     @Override
     public Planner create(Planner user) {
-        user = nullCheck(user);
-
         if (user == null) {
-            return null;
-        }
-
-        final int loginId = findNextLoginId();
-        final String loginSql = "insert into login (login_id, username, password_hash, enabled) values (?, ?, ?, ?)";
-        jdbcTemplate.update(loginSql, loginId, user.getUsername(), user.getPassword(), user.isEnabled());
-
-        final String plannerSql = "insert into planner (login_id, config_id, `name`) values (?, ?, ?)";
-        jdbcTemplate.update(plannerSql, loginId, user.getConfigId(), user.getName());
-
-        return user;
-
-    }
-
-    // TODO: implement update and delete if there is time
-
-    private int findNextLoginId() {
-        final String sql = "select max(login_id) from login";
-        Integer maxId = jdbcTemplate.queryForObject(sql, Integer.class);
-        if (maxId == null) {
-            return 1;
-        }
-        return maxId + 1;
-    }
-
-    private Planner nullCheck(Planner user) {
-        if (user == null) {
-            return null;
-        }
-        if (user.getPlannerId() <= 0) {
-            return null;
-        }
-
-        if (user.getConfigId() <= 0) {
-            return null;
-        }
-
-        if (user.getName() == null || user.getName().isBlank()) {
             return null;
         }
 
@@ -89,6 +52,22 @@ public class PlannerJdbcRepository implements PlannerRepository {
             return null;
         }
 
+        final String loginSql = "insert into login (username, password_hash, enabled) values (?, ?, ?)";
+
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+        int rowsAffected = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(loginSql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getPassword());
+            ps.setBoolean(3, user.isEnabled());
+            return ps;
+        }, keyHolder);
+
+        if (rowsAffected <= 0) {
+            return null;
+        }
+
+        user.setPlannerId(keyHolder.getKey().intValue());
         return user;
     }
 }

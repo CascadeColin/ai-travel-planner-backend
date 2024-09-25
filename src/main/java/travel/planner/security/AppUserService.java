@@ -32,29 +32,39 @@ public class AppUserService implements UserDetailsService {
 
     // TODO: implement creating users, validation, and password encoding checks for new users
 
-    public Result<Planner> create(String username, String password) {
-        Result<Planner> result = validate(username, password);
+    public Result<Planner> create(String username, String password, String name) {
+
+        Result<Planner> result = validate(username, password, name);
         if (!result.isSuccess()) {
             return result;
         }
+        boolean passwordValid = isPasswordValid(password);
+        if (!passwordValid) {
+            result.addMessage(ActionStatus.INVALID, "Password must be at least 8 characters long.");
+            return result;
+        }
         password = passwordEncoder.encode(password);
-        Planner planner = new Planner(0, username, password, true, "New User", 0, 0);
+        Planner planner = new Planner(0, username, password, true, name, 0, 0);
         try {
             planner = plannerReposity.create(planner);
             result.setPayload(planner);
         } catch (DuplicateKeyException e) {
-            result.addMessage(ActionStatus.INVALID, "The provided username already exists");
+            System.out.println(e);
+            result.addMessage(ActionStatus.INVALID, "Failed to add user");
         }
         return result;
     }
 
-    private Result<Planner> validate(String username, String password) {
+    private Result<Planner> validate(String username, String password, String name) {
         Result<Planner> result = new Result<>();
         if (username == null || username.trim().isEmpty()) {
             result.addMessage(ActionStatus.INVALID, "Username is required.");
         }
         if (password == null || password.trim().isEmpty()) {
             result.addMessage(ActionStatus.INVALID, "Password is required.");
+        }
+        if (name == null || name.trim().isEmpty()) {
+            result.addMessage(ActionStatus.INVALID, "Name is required.");
         }
         return result;
     }

@@ -34,7 +34,7 @@ Content-Type: application/json
 #### refresh a valid user token
 
 POST {{url}}/refresh_token HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0cmF2ZWwtcGxhbm5lciIsInN1YiI6InJzbWl0aEBiaWdjb21wYW55LmNvbSIsInBsYW5uZXJJZCI6MSwiZXhwIjoxNzI3MjM5MTE4fQ.zSgAQ10jn_al41fKXDyOpPry0nzuDcxbLHWA1PEghcs
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0cmF2ZWwtcGxhbm5lciIsInN1YiI6InJzbWl0aEBiaWdjb21wYW55LmNvbSIsInBsYW5uZXJJZCI6MSwiZXhwIjoxNzI3Mzg0NjI1fQ.Sj7lVXdNsCnHKewwGUizZ8dmGIfvvjpO0kBDfmHKEK8
 
 ### create new account
 
@@ -42,9 +42,19 @@ POST {{url}}/create_account HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "newuser53@fakeemail.net",
+    "username": "newuser5343@fakeemail.net",
     "password": "abcdefg123456",
     "name": "Ralph Williams"
+}
+
+### good credentials
+
+POST {{url}}/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "newuser5343@fakeemail.net",
+    "password": "abcdefg123456"
 }
 
 ### rejected -> invalid password

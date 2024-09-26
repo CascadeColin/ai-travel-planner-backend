@@ -64,8 +64,10 @@ public class AuthController {
             return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
         }
 
-        HashMap<String, Integer> map = new HashMap<>();
+        HashMap<String, Object> map = new HashMap<>();
         map.put("planner_id", result.getPayload().getPlannerId());
+        map.put("username", result.getPayload().getUsername());
+        map.put("name", result.getPayload().getName());
         return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
 }

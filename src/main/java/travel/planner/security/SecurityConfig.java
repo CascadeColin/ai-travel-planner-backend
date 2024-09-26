@@ -24,21 +24,26 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable);
         http.cors(Customizer.withDefaults());
         http.authorizeHttpRequests(authorize -> authorize
+// TODO: reduce access once it is established who can access what
+                .requestMatchers(HttpMethod.GET, "/trip").permitAll()
+                .requestMatchers(HttpMethod.GET, "/trip/*").permitAll()
+                .requestMatchers(HttpMethod.POST, "/trip").permitAll()
+                .requestMatchers(HttpMethod.POST, "/trip/*").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/trip").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/trip/*").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/trip").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/trip/*").permitAll()
+                .requestMatchers(HttpMethod.GET, "/config").permitAll()
+                .requestMatchers(HttpMethod.GET, "/config/*").permitAll()
+                .requestMatchers(HttpMethod.POST, "/config").permitAll()
+                .requestMatchers(HttpMethod.POST, "/config/*").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/config").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/config/*").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/config").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/config/*").permitAll()
                 .requestMatchers("/authenticate").permitAll() // needed so users can reach AuthController
                 .requestMatchers("/refresh_token").authenticated()
-                // TODO: implement account creation as stretch goal
                 .requestMatchers("/create_account").permitAll()
-//                .requestMatchers(HttpMethod.GET,
-//                        "/order").permitAll()
-//                .requestMatchers(HttpMethod.GET,
-//                        "/sighting", "/sighting/*").permitAll()
-//                .requestMatchers(HttpMethod.POST,
-//                        "/sighting").hasAnyAuthority("USER", "ADMIN")
-//                .requestMatchers(HttpMethod.PUT,
-//                        "/sighting/*").hasAnyAuthority("USER", "ADMIN")
-//                .requestMatchers(HttpMethod.DELETE,
-//                        "/sighting/*").hasAnyAuthority("ADMIN")
-                // TODO: add my own endpoints here, above is for syntax demonstration
                 .requestMatchers("/**").denyAll()
         );
 

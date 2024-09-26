@@ -24,8 +24,12 @@ public class TripController {
     }
 
     @GetMapping("/{tripId}")
-    public Trip findById(int tripId) {
-        return service.findById(tripId);
+    public ResponseEntity<Trip> findById(@PathVariable int tripId) {
+        Trip trip = service.findById(tripId);
+        if (trip == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(trip);
     }
 
     // TODO: test this, implement StatusGenerator in ConfigController if it works

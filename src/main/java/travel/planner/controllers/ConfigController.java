@@ -25,8 +25,12 @@ public class ConfigController {
     }
 
     @GetMapping("/{configId}")
-    public Config findById(int configId) {
-        return service.findById(configId);
+    public ResponseEntity<Config> findById(@PathVariable int configId) {
+        Config config = service.findById(configId);
+        if (config == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(config);
     }
 
     @PostMapping

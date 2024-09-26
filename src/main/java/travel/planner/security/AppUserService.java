@@ -66,6 +66,14 @@ public class AppUserService implements UserDetailsService {
         if (name == null || name.trim().isEmpty()) {
             result.addMessage(ActionStatus.INVALID, "Name is required.");
         }
+
+        if (username != null && username.length() > 50) {
+            result.addMessage(ActionStatus.INVALID, "Username must be less than 50 characters.");
+        }
+
+        if (name != null && name.length() > 50) {
+            result.addMessage(ActionStatus.INVALID, "Name must be less than 50 characters.");
+        }
         return result;
     }
 

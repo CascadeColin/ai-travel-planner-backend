@@ -1,0 +1,28 @@
+@url = http://localhost:8080/trip
+
+GET {{url}}
+
+###
+
+GET {{url}}/1
+
+###
+
+POST {{url}}
+Content-Type: application/json
+
+{
+    "startDate": "2024-11-06",
+    "endDate": "2024-11-11",
+    "destination": "Maui",
+    "tripDetails": "A beach vacation",
+    "plannerId": 1
+}
+
+###
+
+
+POST {{url}}
+Content-Type: application/json
+
+{"tripId":0,"startDate":"2024-11-01","endDate":"2024-11-06","destination":"Trip 1","tripDetails":"Description 1","plannerId":1}

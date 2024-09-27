@@ -60,8 +60,8 @@ insert into planner (`name`, login_id, config_id) values
     ("Fred", 3, 3);
     
 insert into trip (start_date, end_date, destination, trip_details, planner_id) values 
-	("2024-08-01", "2024-08-05", "Las Vegas", "A trip to Las Vegas for the big business convention.", 1),
-	("2025-01-01", "2024-01-05", "Tokyo", "A trip to Tokyo in 2025 for the big business convention.", 1),
+-- 	("2024-08-01", "2024-08-05", "Las Vegas", "A trip to Las Vegas for the big business convention.", 1),
+-- 	("2025-01-01", "2024-01-05", "Tokyo", "A trip to Tokyo in 2025 for the big business convention.", 1),
 	("2024-06-04", "2024-07-05", "Paris", "Going on tour in France!", 2),
 	("2025-09-15", "2025-09-20", "Berlin", "Testing a massive 21,000 character text here to see the limits of VARCHAR datatype.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ornare, elit non malesuada pretium, ante enim ultrices sem, sit amet fringilla velit erat ut augue. Nunc dictum erat nulla, ut lobortis odio interdum id. Vestibulum volutpat lacus nec justo tincidunt, a ultrices tortor gravida. Phasellus ultricies purus vel orci suscipit, non condimentum libero vestibulum. Aenean vitae nibh in est suscipit sagittis vel nec augue. Proin accumsan mauris at diam porttitor malesuada. Nulla ac lorem scelerisque, volutpat lacus ut, dapibus nunc. Integer pharetra mollis dapibus. Cras posuere eros non mi varius, quis egestas ligula ultricies. Donec a eros sed nisl lobortis porta at at metus. Duis vitae mauris vel nulla venenatis rhoncus. Duis quis enim vel ligula scelerisque tristique.
 

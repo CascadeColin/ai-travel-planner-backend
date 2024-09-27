@@ -40,7 +40,14 @@ public class AuthController {
 
             if (authentication.isAuthenticated()) {
                 String jwtToken = converter.getTokenFromPlanner((Planner) authentication.getPrincipal());
-                return new ResponseEntity<>(Map.of("jwt_token", jwtToken), HttpStatus.OK);
+                HashMap<String,String> map = new HashMap<>();
+                map.put("jwt_token", jwtToken);
+                map.put("planner_id", String.valueOf(((Planner) authentication.getPrincipal()).getPlannerId()));
+                map.put("username", ((Planner) authentication.getPrincipal()).getUsername());
+                map.put("name", ((Planner) authentication.getPrincipal()).getName());
+                map.put("config_id", String.valueOf(((Planner) authentication.getPrincipal()).getConfigId()));
+                map.put("login_id", String.valueOf(((Planner) authentication.getPrincipal()).getLoginId()));
+                return new ResponseEntity<>(map, HttpStatus.OK);
             }
         } catch (AuthenticationException ex) {
             System.out.println(ex);  // TODO: handle in global error handler

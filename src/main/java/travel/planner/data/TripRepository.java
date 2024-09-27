@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface TripRepository {
     List<Trip> findAll();
+    List<Trip> findAllByPlanner(int plannerId);
+
     Trip findById(int tripId);
     Trip create(Trip trip);
     boolean update(Trip trip);

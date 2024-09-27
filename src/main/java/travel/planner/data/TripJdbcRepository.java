@@ -21,6 +21,12 @@ public class TripJdbcRepository implements TripRepository {
     }
 
     @Override
+    public List<Trip> findAllByPlanner(int plannerId) {
+        final String sql = "select trip_id, start_date, end_date, destination, trip_details, planner_id from trip where planner_id = ?";
+        return jdbcTemplate.query(sql, new TripMapper(), plannerId);
+    }
+
+    @Override
     public Trip findById(int tripId) {
         final String sql = "select trip_id, start_date, end_date, destination, trip_details, planner_id from trip where trip_id = ?";
         return jdbcTemplate.query(sql, new TripMapper(), tripId).stream().findFirst().orElse(null);

@@ -18,6 +18,10 @@ public class TripService {
         return tripRepository.findAll();
     }
 
+    public List<Trip> findAllByPlanner(int plannerId) {
+        return tripRepository.findAllByPlanner(plannerId);
+    }
+
     public Trip findById(int tripId) {
         Trip trip = tripRepository.findById(tripId);
         Result<Trip> result = validate(trip);

@@ -23,6 +23,11 @@ public class TripController {
         return service.findAll();
     }
 
+    @GetMapping("/planner/{plannerId}")
+    public List<Trip> findAllByPlanner(@PathVariable int plannerId) {
+        return service.findAllByPlanner(plannerId);
+    }
+
     @GetMapping("/{tripId}")
     public ResponseEntity<Trip> findById(@PathVariable int tripId) {
         Trip trip = service.findById(tripId);

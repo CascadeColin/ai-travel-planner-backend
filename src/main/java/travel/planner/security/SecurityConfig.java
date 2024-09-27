@@ -27,6 +27,7 @@ public class SecurityConfig {
 // TODO: reduce access once it is established who can access what
                 .requestMatchers(HttpMethod.GET, "/trip").permitAll()
                 .requestMatchers(HttpMethod.GET, "/trip/*").permitAll()
+                .requestMatchers(HttpMethod.GET, "/trip/planner/*").permitAll()
                 .requestMatchers(HttpMethod.POST, "/trip").permitAll()
                 .requestMatchers(HttpMethod.POST, "/trip/*").permitAll()
                 .requestMatchers(HttpMethod.PUT, "/trip").permitAll()
